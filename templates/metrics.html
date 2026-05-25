@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Metrics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="page-content">
+
+    <h1>System Metrics</h1>
+
+    <div class="metric-grid">
+
+        <div class="metric-box">
+            <h2>CPU</h2>
+            <p>{{ cpu }}%</p>
+        </div>
+
+        <div class="metric-box">
+            <h2>Memory</h2>
+            <p>{{ memory }}%</p>
+        </div>
+
+        <div class="metric-box">
+            <h2>Disk</h2>
+            <p>{{ disk }}%</p>
+        </div>
+
+        <div class="metric-box">
+            <h2>Network</h2>
+            <p>{{ network }} MB</p>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

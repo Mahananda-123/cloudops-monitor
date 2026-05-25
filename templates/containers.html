@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Containers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="page-content">
+
+    <h1>Container Status</h1>
+
+    {% for container in containers %}
+
+    <div class="container-card">
+
+        <h2>{{ container.name }}</h2>
+
+        <p>{{ container.status }}</p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
