@@ -128,12 +128,12 @@ def reports():
         report_time=report_time
     )
 
-# ================= SETTINGS =================
+# # ================= SETTINGS =================
 
-@app.route("/settings")
-def settings():
+# @app.route("/settings")
+# def settings():
 
-    return render_template("settings.html")
+#     return render_template("settings.html")
 
 # ================= RUN =================
 
