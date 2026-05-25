@@ -99,7 +99,7 @@ def dashboard():
             f"Memory Usage is High: {memory}%"
         )
 
-    if disk > 90:
+    if disk > 2:
 
         alerts.append("Low Disk Space Warning")
 
