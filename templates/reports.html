@@ -2,25 +2,92 @@
 <html>
 <head>
     <title>Reports</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
+
 <body>
 
 <div class="page-content">
 
-    <h1>System Reports</h1>
+    <div class="page-header">
+        <h1>System Reports</h1>
+        <p>Daily monitoring and server analytics</p>
+    </div>
 
-    <div class="report-card">
+    <div class="reports-grid">
 
-        <h2>Daily Report</h2>
+        <div class="report-card">
 
-        <p>Generated Successfully</p>
+            <div class="report-icon blue">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
 
-        <p>{{ report_time }}</p>
+            <h2>CPU Report</h2>
+
+            <p>Processor performance monitored successfully.</p>
+
+            <div class="report-footer">
+                Generated: {{ report_time }}
+            </div>
+
+        </div>
+
+        <div class="report-card">
+
+            <div class="report-icon green">
+                <i class="fa-solid fa-memory"></i>
+            </div>
+
+            <h2>Memory Report</h2>
+
+            <p>RAM usage analytics generated successfully.</p>
+
+            <div class="report-footer">
+                Generated: {{ report_time }}
+            </div>
+
+        </div>
+
+        <div class="report-card">
+
+            <div class="report-icon purple">
+                <i class="fa-solid fa-hard-drive"></i>
+            </div>
+
+            <h2>Disk Report</h2>
+
+            <p>Storage monitoring report available.</p>
+
+            <div class="report-footer">
+                Generated: {{ report_time }}
+            </div>
+
+        </div>
+
+        <div class="report-card">
+
+            <div class="report-icon orange">
+                <i class="fa-solid fa-network-wired"></i>
+            </div>
+
+            <h2>Network Report</h2>
+
+            <p>Live traffic and bandwidth statistics collected.</p>
+
+            <div class="report-footer">
+                Generated: {{ report_time }}
+            </div>
+
+        </div>
 
     </div>
 
 </div>
 
 </body>
-</html>s
+</html>
