@@ -5,141 +5,385 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CloudOps Monitor</title>
 
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+    <!-- Chart JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Font Awesome -->
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
+<!-- SIDEBAR -->
 <div class="sidebar">
-    <h2><i class="fa-solid fa-cloud"></i> CloudOps</h2>
+
+    <div class="logo-section">
+        <h2><i class="fa-solid fa-cloud"></i> CloudOps</h2>
+    </div>
 
     <ul>
-        <li class="active"><i class="fa-solid fa-chart-line"></i> Dashboard</li>
-        <li><i class="fa-solid fa-server"></i> Metrics</li>
-        <li><i class="fa-solid fa-bell"></i> Alerts</li>
-        <li><i class="fa-solid fa-database"></i> Containers</li>
-        <li><i class="fa-solid fa-gear"></i> Settings</li>
+        <li class="active">
+            <i class="fa-solid fa-chart-line"></i>
+            Dashboard
+        </li>
+
+        <li>
+            <i class="fa-solid fa-server"></i>
+            System Metrics
+        </li>
+
+        <li>
+            <i class="fa-solid fa-bell"></i>
+            Alerts
+        </li>
+
+        <li>
+            <i class="fa-solid fa-database"></i>
+            Containers
+        </li>
+
+        <li>
+            <i class="fa-solid fa-file"></i>
+            Reports
+        </li>
+
+        <li>
+            <i class="fa-solid fa-gear"></i>
+            Settings
+        </li>
     </ul>
+
+    <div class="status-card">
+        <h4>System Status</h4>
+        <div class="healthy">
+            Healthy
+        </div>
+
+        <p>All systems operational</p>
+
+        <div class="shield-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+    </div>
+
 </div>
 
+<!-- MAIN CONTENT -->
 <div class="main-content">
 
+    <!-- TOPBAR -->
     <div class="topbar">
-        <h1>CloudOps Monitor Dashboard</h1>
 
-        <div class="time-box">
-            <i class="fa-regular fa-clock"></i>
-            <span id="clock"></span>
+        <div>
+            <h1>CloudOps Monitor Dashboard</h1>
+            <p class="subtitle">
+                Real-time monitoring and system insights
+            </p>
         </div>
+
+        <div class="top-right">
+
+            <div class="refresh-box">
+                <i class="fa-solid fa-rotate"></i>
+                Auto Refresh
+                <span class="toggle-on">ON</span>
+            </div>
+
+            <div class="time-box">
+                <i class="fa-regular fa-clock"></i>
+                <div>
+                    <span id="clock"></span>
+                    <small id="date"></small>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
+    <!-- METRIC CARDS -->
     <div class="cards">
 
+        <!-- CPU -->
         <div class="card-box cpu">
+
             <div>
                 <h3>CPU Usage</h3>
+
                 <h2>{{ cpu }}%</h2>
+
+                <p>{{ cpu / 10 }} / 10 cores</p>
             </div>
-            <i class="fa-solid fa-microchip"></i>
+
+            <div class="icon-circle">
+                <i class="fa-solid fa-microchip"></i>
+            </div>
+
         </div>
 
+        <!-- MEMORY -->
         <div class="card-box memory">
+
             <div>
                 <h3>Memory Usage</h3>
+
                 <h2>{{ memory }}%</h2>
+
+                <p>Real-time RAM monitoring</p>
             </div>
-            <i class="fa-solid fa-memory"></i>
+
+            <div class="icon-circle">
+                <i class="fa-solid fa-memory"></i>
+            </div>
+
         </div>
 
+        <!-- DISK -->
         <div class="card-box disk">
+
             <div>
                 <h3>Disk Usage</h3>
+
                 <h2>{{ disk }}%</h2>
+
+                <p>Storage utilization</p>
             </div>
-            <i class="fa-solid fa-hard-drive"></i>
+
+            <div class="icon-circle">
+                <i class="fa-solid fa-hard-drive"></i>
+            </div>
+
+        </div>
+
+        <!-- NETWORK -->
+        <div class="card-box network">
+
+            <div>
+                <h3>Network I/O</h3>
+
+                <h2>{{ recv }} MB</h2>
+
+                <p>
+                    ↑ {{ sent }} MB
+                </p>
+            </div>
+
+            <div class="icon-circle">
+                <i class="fa-solid fa-arrow-up-right-dots"></i>
+            </div>
+
         </div>
 
     </div>
 
-    <div class="chart-container">
-        <canvas id="myChart"></canvas>
-    </div>
+    <!-- GRAPH + SYSTEM INFO -->
+    <div class="middle-section">
 
-    <div class="info-section">
+        <!-- GRAPH -->
+        <div class="chart-box">
 
-        <div class="system-box">
+            <div class="chart-header">
+                <h3>System Overview</h3>
+
+                <button class="time-btn">
+                    Last 1 Hour
+                </button>
+            </div>
+
+            <canvas id="myChart"></canvas>
+
+        </div>
+
+        <!-- SYSTEM INFO -->
+        <div class="system-info">
+
             <h3>System Information</h3>
 
-            <p><strong>Hostname:</strong> {{ hostname }}</p>
-            <p><strong>Operating System:</strong> {{ os }}</p>
-            <p><strong>Current Time:</strong> {{ time }}</p>
+            <div class="info-item">
+                <i class="fa-solid fa-desktop"></i>
+                <span>Hostname</span>
+                <strong>{{ hostname }}</strong>
+            </div>
+
+            <div class="info-item">
+                <i class="fa-brands fa-linux"></i>
+                <span>Operating System</span>
+                <strong>{{ os }}</strong>
+            </div>
+
+            <div class="info-item">
+                <i class="fa-solid fa-clock"></i>
+                <span>Current Time</span>
+                <strong>{{ time }}</strong>
+            </div>
+
+            <div class="server-image">
+                <i class="fa-solid fa-server"></i>
+            </div>
+
         </div>
 
+    </div>
+
+    <!-- LOWER SECTION -->
+    <div class="bottom-section">
+
+        <!-- ALERTS -->
         <div class="alert-box">
-            <h3>Recent Alerts</h3>
+
+            <div class="section-title">
+                <h3>Recent Alerts</h3>
+
+                <a href="#">View All</a>
+            </div>
 
             <div class="alert-item warning">
-                High Disk Usage Detected
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <div>
+                    <strong>Disk usage is above 85%</strong>
+                    <p>/dev/xvda1 is {{ disk }}%</p>
+                </div>
             </div>
 
             <div class="alert-item success">
-                System Running Smoothly
+                <i class="fa-solid fa-circle-check"></i>
+
+                <div>
+                    <strong>System backup completed</strong>
+                    <p>Backup completed successfully</p>
+                </div>
             </div>
 
             <div class="alert-item info">
-                Monitoring Active
+                <i class="fa-solid fa-circle-info"></i>
+
+                <div>
+                    <strong>Monitoring active</strong>
+                    <p>All services are running fine</p>
+                </div>
             </div>
+
+        </div>
+
+        <!-- CONTAINER STATUS -->
+        <div class="container-box">
+
+            <div class="section-title">
+                <h3>Container Status</h3>
+
+                <a href="#">View All</a>
+            </div>
+
+            <div class="container-item">
+                <div>
+                    <strong>cloudops-monitor-app</strong>
+                    <p>Running</p>
+                </div>
+
+                <span class="running">Running</span>
+            </div>
+
+            <div class="container-item">
+                <div>
+                    <strong>jenkins</strong>
+                    <p>CI/CD Active</p>
+                </div>
+
+                <span class="running">Running</span>
+            </div>
+
+            <div class="container-item">
+                <div>
+                    <strong>docker-engine</strong>
+                    <p>Healthy</p>
+                </div>
+
+                <span class="running">Running</span>
+            </div>
+
         </div>
 
     </div>
 
 </div>
 
+<!-- CHART -->
 <script>
 
 const ctx = document.getElementById('myChart');
 
 new Chart(ctx, {
     type: 'line',
+
     data: {
-        labels: ['1','2','3','4','5','6','7'],
+        labels: ['10m','20m','30m','40m','50m','60m','70m'],
+
         datasets: [
+
         {
             label: 'CPU',
             data: [12,19,15,22,18,25,20],
             borderColor: '#4F46E5',
+            backgroundColor: 'transparent',
             tension: 0.4
         },
+
         {
             label: 'Memory',
             data: [30,40,35,50,45,55,48],
             borderColor: '#10B981',
+            backgroundColor: 'transparent',
             tension: 0.4
         },
+
         {
             label: 'Disk',
             data: [60,65,70,75,72,80,78],
             borderColor: '#F97316',
+            backgroundColor: 'transparent',
             tension: 0.4
         }
+
         ]
+    },
+
+    options: {
+        responsive: true,
+
+        plugins: {
+            legend: {
+                position: 'top'
+            }
+        }
     }
 });
 
 function updateClock() {
+
     const now = new Date();
+
     document.getElementById('clock').innerHTML =
     now.toLocaleTimeString();
+
+    document.getElementById('date').innerHTML =
+    now.toDateString();
 }
 
 setInterval(updateClock, 1000);
+
+updateClock();
+
+setTimeout(() => {
+    location.reload();
+}, 5000);
 
 </script>
 
