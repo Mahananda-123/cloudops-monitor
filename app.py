@@ -7,14 +7,16 @@ from datetime import datetime
 app = Flask(__name__)
 
 @app.route('/')
-def dashboard():
+def home():
 
-    cpu = psutil.cpu_percent(interval=1)
+    cpu = psutil.cpu_percent()
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
+
     hostname = socket.gethostname()
-    system = platform.system()
-    time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    os = platform.system()
+
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     return render_template(
         'index.html',
@@ -22,8 +24,8 @@ def dashboard():
         memory=memory,
         disk=disk,
         hostname=hostname,
-        system=system,
-        time_now=time_now
+        os=os,
+        time=current_time
     )
 
 if __name__ == '__main__':
