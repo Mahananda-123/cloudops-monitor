@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -30,43 +31,47 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     <ul>
 
-        <li class="active">
+        <li class="menu-item active" data-target="dashboard-section">
             <i class="fa-solid fa-chart-line"></i>
-            Dashboard
+            <span>Dashboard</span>
         </li>
 
-        <li>
+        <li class="menu-item" data-target="metrics-section">
             <i class="fa-solid fa-server"></i>
-            Metrics
+            <span>Metrics</span>
         </li>
 
-        <li>
+        <li class="menu-item" data-target="alerts-section">
             <i class="fa-solid fa-bell"></i>
-            Alerts
+            <span>Alerts</span>
         </li>
 
-        <li>
+        <li class="menu-item" data-target="containers-section">
             <i class="fa-solid fa-database"></i>
-            Containers
+            <span>Containers</span>
         </li>
 
-        <li>
+        <li class="menu-item" data-target="reports-section">
             <i class="fa-solid fa-file"></i>
-            Reports
+            <span>Reports</span>
         </li>
 
-        <li>
+        <li class="menu-item" data-target="settings-section">
             <i class="fa-solid fa-gear"></i>
-            Settings
+            <span>Settings</span>
         </li>
 
     </ul>
 
 </div>
 
-<!-- MAIN -->
+<!-- MAIN CONTENT -->
 
 <div class="main">
+
+<!-- DASHBOARD -->
+
+<div id="dashboard-section" class="page-section">
 
     <!-- TOPBAR -->
 
@@ -76,9 +81,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
             <h1>CloudOps Monitor Dashboard</h1>
 
-            <p>
-                Real-time server monitoring system
-            </p>
+            <p>Real-time server monitoring system</p>
 
         </div>
 
@@ -178,82 +181,85 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     </div>
 
-    <!-- LOWER GRID -->
+</div>
 
-    <div class="lower-grid">
+<!-- METRICS -->
 
-        <!-- SYSTEM INFO -->
+<div id="metrics-section"
+class="page-section"
+style="display:none;">
 
-        <div class="info-box">
+    <div class="content-box">
 
-            <h2>System Information</h2>
+        <h2>System Metrics</h2>
 
-            <div class="info-row">
-                <i class="fa-solid fa-desktop"></i>
-                <span>{{ hostname }}</span>
-            </div>
+        <div class="metric-item">
+            CPU Usage : {{ cpu }}%
+        </div>
 
-            <div class="info-row">
-                <i class="fa-brands fa-linux"></i>
-                <span>{{ os }}</span>
-            </div>
+        <div class="metric-item">
+            Memory Usage : {{ memory }}%
+        </div>
 
-            <div class="info-row">
-                <i class="fa-solid fa-clock"></i>
-                <span>{{ time }}</span>
+        <div class="metric-item">
+            Disk Usage : {{ disk }}%
+        </div>
+
+        <div class="metric-item">
+            Network Usage : {{ network }} MB
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ALERTS -->
+
+<div id="alerts-section"
+class="page-section"
+style="display:none;">
+
+    <div class="content-box">
+
+        <h2>Recent Alerts</h2>
+
+        <div class="alert red">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            <div>
+
+                <strong>Disk usage high</strong>
+
+                <p>{{ disk }}% usage detected</p>
+
             </div>
 
         </div>
 
-        <!-- ALERTS -->
+        <div class="alert green">
 
-        <div class="alerts">
+            <i class="fa-solid fa-circle-check"></i>
 
-            <div class="section-title">
+            <div>
 
-                <h2>Recent Alerts</h2>
+                <strong>Backup successful</strong>
 
-            </div>
-
-            <div class="alert red">
-
-                <i class="fa-solid fa-triangle-exclamation"></i>
-
-                <div>
-
-                    <strong>Disk usage high</strong>
-
-                    <p>{{ disk }}% usage detected</p>
-
-                </div>
+                <p>System running properly</p>
 
             </div>
 
-            <div class="alert green">
+        </div>
 
-                <i class="fa-solid fa-circle-check"></i>
+        <div class="alert blue">
 
-                <div>
+            <i class="fa-solid fa-circle-info"></i>
 
-                    <strong>Backup successful</strong>
+            <div>
 
-                    <p>System running properly</p>
+                <strong>Monitoring active</strong>
 
-                </div>
-
-            </div>
-
-            <div class="alert blue">
-
-                <i class="fa-solid fa-circle-info"></i>
-
-                <div>
-
-                    <strong>Monitoring active</strong>
-
-                    <p>CloudOps connected successfully</p>
-
-                </div>
+                <p>CloudOps connected successfully</p>
 
             </div>
 
@@ -261,15 +267,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     </div>
 
-    <!-- CONTAINER -->
+</div>
 
-    <div class="container-section">
+<!-- CONTAINERS -->
 
-        <div class="section-title">
+<div id="containers-section"
+class="page-section"
+style="display:none;">
 
-            <h2>Container Status</h2>
+    <div class="content-box">
 
-        </div>
+        <h2>Container Status</h2>
 
         <div class="container-row">
 
@@ -297,20 +305,41 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         </div>
 
-        <div class="container-row">
+    </div>
 
-            <div>
-                <strong>docker-engine</strong>
-                <p>Container Service</p>
-            </div>
+</div>
 
-            <span class="badge blue-bg">
-                Healthy
-            </span>
+<!-- REPORTS -->
 
-        </div>
+<div id="reports-section"
+class="page-section"
+style="display:none;">
+
+    <div class="content-box">
+
+        <h2>Reports</h2>
+
+        <p>Daily monitoring reports available.</p>
 
     </div>
+
+</div>
+
+<!-- SETTINGS -->
+
+<div id="settings-section"
+class="page-section"
+style="display:none;">
+
+    <div class="content-box">
+
+        <h2>Settings</h2>
+
+        <p>CloudOps configuration panel.</p>
+
+    </div>
+
+</div>
 
 </div>
 
@@ -352,13 +381,35 @@ function updateClock(){
     const now = new Date();
 
     document.getElementById("clock").innerHTML =
-
     now.toLocaleTimeString();
 }
 
 setInterval(updateClock,1000);
 
 updateClock();
+
+const menuItems = document.querySelectorAll(".menu-item");
+const sections = document.querySelectorAll(".page-section");
+
+menuItems.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        menuItems.forEach(i => i.classList.remove("active"));
+
+        item.classList.add("active");
+
+        const target = item.getAttribute("data-target");
+
+        sections.forEach(section => {
+            section.style.display = "none";
+        });
+
+        document.getElementById(target).style.display = "block";
+
+    });
+
+});
 
 </script>
 
