@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudOps Monitor</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>CloudOps Monitor</title>
 
-    <!-- Chart JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
 
 <!-- SIDEBAR -->
+
 <div class="sidebar">
 
-    <div class="logo-section">
-        <h2><i class="fa-solid fa-cloud"></i> CloudOps</h2>
+    <div class="logo">
+        <i class="fa-solid fa-cloud"></i>
+        <span>CloudOps</span>
     </div>
 
     <ul>
+
         <li class="active">
             <i class="fa-solid fa-chart-line"></i>
             Dashboard
@@ -36,7 +37,7 @@
 
         <li>
             <i class="fa-solid fa-server"></i>
-            System Metrics
+            Metrics
         </li>
 
         <li>
@@ -58,256 +59,254 @@
             <i class="fa-solid fa-gear"></i>
             Settings
         </li>
+
     </ul>
-
-    <div class="status-card">
-        <h4>System Status</h4>
-        <div class="healthy">
-            Healthy
-        </div>
-
-        <p>All systems operational</p>
-
-        <div class="shield-icon">
-            <i class="fa-solid fa-shield-halved"></i>
-        </div>
-    </div>
 
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="main-content">
+<!-- MAIN -->
+
+<div class="main">
 
     <!-- TOPBAR -->
+
     <div class="topbar">
 
         <div>
+
             <h1>CloudOps Monitor Dashboard</h1>
-            <p class="subtitle">
-                Real-time monitoring and system insights
+
+            <p>
+                Real-time server monitoring system
             </p>
+
         </div>
 
-        <div class="top-right">
+        <div class="clock-box">
 
-            <div class="refresh-box">
-                <i class="fa-solid fa-rotate"></i>
-                Auto Refresh
-                <span class="toggle-on">ON</span>
-            </div>
+            <i class="fa-regular fa-clock"></i>
 
-            <div class="time-box">
-                <i class="fa-regular fa-clock"></i>
-                <div>
-                    <span id="clock"></span>
-                    <small id="date"></small>
-                </div>
-            </div>
+            <span id="clock"></span>
 
         </div>
 
     </div>
 
-    <!-- METRIC CARDS -->
+    <!-- CARDS -->
+
     <div class="cards">
 
-        <!-- CPU -->
-        <div class="card-box cpu">
+        <div class="card cpu">
 
             <div>
+
                 <h3>CPU Usage</h3>
 
-                <h2>{{ cpu }}%</h2>
+                <h1>{{ cpu }}%</h1>
 
-                <p>{{ cpu / 10 }} / 10 cores</p>
+                <p>Real-time Processor</p>
+
             </div>
 
-            <div class="icon-circle">
-                <i class="fa-solid fa-microchip"></i>
-            </div>
+            <i class="fa-solid fa-microchip"></i>
 
         </div>
 
-        <!-- MEMORY -->
-        <div class="card-box memory">
+        <div class="card ram">
 
             <div>
+
                 <h3>Memory Usage</h3>
 
-                <h2>{{ memory }}%</h2>
+                <h1>{{ memory }}%</h1>
 
-                <p>Real-time RAM monitoring</p>
+                <p>RAM Monitoring</p>
+
             </div>
 
-            <div class="icon-circle">
-                <i class="fa-solid fa-memory"></i>
-            </div>
+            <i class="fa-solid fa-memory"></i>
 
         </div>
 
-        <!-- DISK -->
-        <div class="card-box disk">
+        <div class="card disk">
 
             <div>
+
                 <h3>Disk Usage</h3>
 
-                <h2>{{ disk }}%</h2>
+                <h1>{{ disk }}%</h1>
 
-                <p>Storage utilization</p>
+                <p>Storage Monitoring</p>
+
             </div>
 
-            <div class="icon-circle">
-                <i class="fa-solid fa-hard-drive"></i>
-            </div>
+            <i class="fa-solid fa-hard-drive"></i>
 
         </div>
 
-        <!-- NETWORK -->
-        <div class="card-box network">
+        <div class="card network">
 
             <div>
-                <h3>Network I/O</h3>
 
-                <h2>{{ recv }} MB</h2>
+                <h3>Network Usage</h3>
 
-                <p>
-                    ↑ {{ sent }} MB
-                </p>
+                <h1>{{ network }} MB</h1>
+
+                <p>Live Traffic</p>
+
             </div>
 
-            <div class="icon-circle">
-                <i class="fa-solid fa-arrow-up-right-dots"></i>
-            </div>
+            <i class="fa-solid fa-network-wired"></i>
 
         </div>
 
     </div>
 
-    <!-- GRAPH + SYSTEM INFO -->
-    <div class="middle-section">
+    <!-- CHART -->
 
-        <!-- GRAPH -->
-        <div class="chart-box">
+    <div class="chart-section">
 
-            <div class="chart-header">
-                <h3>System Overview</h3>
+        <div class="section-title">
 
-                <button class="time-btn">
-                    Last 1 Hour
-                </button>
-            </div>
+            <h2>System Overview</h2>
 
-            <canvas id="myChart"></canvas>
+            <button>Live</button>
 
         </div>
+
+        <canvas id="myChart"></canvas>
+
+    </div>
+
+    <!-- LOWER GRID -->
+
+    <div class="lower-grid">
 
         <!-- SYSTEM INFO -->
-        <div class="system-info">
 
-            <h3>System Information</h3>
+        <div class="info-box">
 
-            <div class="info-item">
+            <h2>System Information</h2>
+
+            <div class="info-row">
                 <i class="fa-solid fa-desktop"></i>
-                <span>Hostname</span>
-                <strong>{{ hostname }}</strong>
+                <span>{{ hostname }}</span>
             </div>
 
-            <div class="info-item">
+            <div class="info-row">
                 <i class="fa-brands fa-linux"></i>
-                <span>Operating System</span>
-                <strong>{{ os }}</strong>
+                <span>{{ os }}</span>
             </div>
 
-            <div class="info-item">
+            <div class="info-row">
                 <i class="fa-solid fa-clock"></i>
-                <span>Current Time</span>
-                <strong>{{ time }}</strong>
-            </div>
-
-            <div class="server-image">
-                <i class="fa-solid fa-server"></i>
+                <span>{{ time }}</span>
             </div>
 
         </div>
 
-    </div>
-
-    <!-- LOWER SECTION -->
-    <div class="bottom-section">
-
         <!-- ALERTS -->
-        <div class="alert-box">
+
+        <div class="alerts">
 
             <div class="section-title">
-                <h3>Recent Alerts</h3>
 
-                <a href="#">View All</a>
+                <h2>Recent Alerts</h2>
+
             </div>
 
-            <div class="alert-item warning">
+            <div class="alert red">
+
                 <i class="fa-solid fa-triangle-exclamation"></i>
 
                 <div>
-                    <strong>Disk usage is above 85%</strong>
-                    <p>/dev/xvda1 is {{ disk }}%</p>
+
+                    <strong>Disk usage high</strong>
+
+                    <p>{{ disk }}% usage detected</p>
+
                 </div>
+
             </div>
 
-            <div class="alert-item success">
+            <div class="alert green">
+
                 <i class="fa-solid fa-circle-check"></i>
 
                 <div>
-                    <strong>System backup completed</strong>
-                    <p>Backup completed successfully</p>
+
+                    <strong>Backup successful</strong>
+
+                    <p>System running properly</p>
+
                 </div>
+
             </div>
 
-            <div class="alert-item info">
+            <div class="alert blue">
+
                 <i class="fa-solid fa-circle-info"></i>
 
                 <div>
+
                     <strong>Monitoring active</strong>
-                    <p>All services are running fine</p>
+
+                    <p>CloudOps connected successfully</p>
+
                 </div>
+
             </div>
 
         </div>
 
-        <!-- CONTAINER STATUS -->
-        <div class="container-box">
+    </div>
 
-            <div class="section-title">
-                <h3>Container Status</h3>
+    <!-- CONTAINER -->
 
-                <a href="#">View All</a>
+    <div class="container-section">
+
+        <div class="section-title">
+
+            <h2>Container Status</h2>
+
+        </div>
+
+        <div class="container-row">
+
+            <div>
+                <strong>cloudops-monitor</strong>
+                <p>Main Monitoring App</p>
             </div>
 
-            <div class="container-item">
-                <div>
-                    <strong>cloudops-monitor-app</strong>
-                    <p>Running</p>
-                </div>
+            <span class="badge green-bg">
+                Running
+            </span>
 
-                <span class="running">Running</span>
+        </div>
+
+        <div class="container-row">
+
+            <div>
+                <strong>jenkins</strong>
+                <p>CI/CD Pipeline</p>
             </div>
 
-            <div class="container-item">
-                <div>
-                    <strong>jenkins</strong>
-                    <p>CI/CD Active</p>
-                </div>
+            <span class="badge green-bg">
+                Running
+            </span>
 
-                <span class="running">Running</span>
+        </div>
+
+        <div class="container-row">
+
+            <div>
+                <strong>docker-engine</strong>
+                <p>Container Service</p>
             </div>
 
-            <div class="container-item">
-                <div>
-                    <strong>docker-engine</strong>
-                    <p>Healthy</p>
-                </div>
-
-                <span class="running">Running</span>
-            </div>
+            <span class="badge blue-bg">
+                Healthy
+            </span>
 
         </div>
 
@@ -315,75 +314,51 @@
 
 </div>
 
-<!-- CHART -->
 <script>
 
 const ctx = document.getElementById('myChart');
 
 new Chart(ctx, {
+
     type: 'line',
 
     data: {
-        labels: ['10m','20m','30m','40m','50m','60m','70m'],
+
+        labels: ['10m','20m','30m','40m','50m','60m'],
 
         datasets: [
 
         {
-            label: 'CPU',
-            data: [12,19,15,22,18,25,20],
-            borderColor: '#4F46E5',
-            backgroundColor: 'transparent',
-            tension: 0.4
+            label:'CPU',
+            data:[12,19,15,22,18,25],
+            borderColor:'#2563EB',
+            tension:0.4
         },
 
         {
-            label: 'Memory',
-            data: [30,40,35,50,45,55,48],
-            borderColor: '#10B981',
-            backgroundColor: 'transparent',
-            tension: 0.4
-        },
-
-        {
-            label: 'Disk',
-            data: [60,65,70,75,72,80,78],
-            borderColor: '#F97316',
-            backgroundColor: 'transparent',
-            tension: 0.4
+            label:'Memory',
+            data:[30,40,35,50,45,55],
+            borderColor:'#10B981',
+            tension:0.4
         }
 
         ]
-    },
-
-    options: {
-        responsive: true,
-
-        plugins: {
-            legend: {
-                position: 'top'
-            }
-        }
     }
+
 });
 
-function updateClock() {
+function updateClock(){
 
     const now = new Date();
 
-    document.getElementById('clock').innerHTML =
-    now.toLocaleTimeString();
+    document.getElementById("clock").innerHTML =
 
-    document.getElementById('date').innerHTML =
-    now.toDateString();
+    now.toLocaleTimeString();
 }
 
-setInterval(updateClock, 1000);
+setInterval(updateClock,1000);
 
 updateClock();
-
-setTimeout(() => {
-    location.reload();
-}, 5000);
 
 </script>
 
