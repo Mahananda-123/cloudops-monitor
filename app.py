@@ -90,7 +90,7 @@ def dashboard():
             f"CPU Usage is High: {cpu}%"
         )
 
-    if memory > 40:
+    if memory >85:
 
         alerts.append("High Memory Usage Detected")
 
