@@ -5,6 +5,7 @@ pipeline {
 
         stage('Build') {
             steps {
+                echo "Building Docker image on branch: ${env.BRANCH_NAME}"
                 sh 'docker build -t cloudops-monitor .'
             }
         }
@@ -15,8 +16,19 @@ pipeline {
             }
 
             steps {
+                echo "Deploying application from main branch"
                 sh 'ansible-playbook -i ansible/inventory ansible/deploy.yml'
             }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully for branch: ${env.BRANCH_NAME}"
+        }
+
+        failure {
+            echo "Pipeline failed for branch: ${env.BRANCH_NAME}"
         }
     }
 }
