@@ -4,16 +4,8 @@
 
   tasks:
 
-    - name: Stop old container
-      shell: docker stop monitor-container
-      ignore_errors: yes
-
     - name: Remove old container
-      shell: docker rm -f monitor-container
-      ignore_errors: yes
-
-    - name: Remove dangling container
-      shell: docker container prune -f
+      shell: docker rm -f monitor-container || true
 
     - name: Build Docker image
       shell: docker build -t cloudops-monitor ..
