@@ -10,5 +10,5 @@
     - name: Build Docker image
       shell: docker build -t cloudops-monitor ..
 
-   - name: Run docker container
-     shell: docker run -d --env-file /opt/cloudops/.env -p 5000:5000 --name monitor-container cloudops-monitor
+    - name: Run docker container
+      shell: docker run -d --env-file /opt/cloudops/.env -p 5000:5000 --name monitor-container cloudops-monitor
