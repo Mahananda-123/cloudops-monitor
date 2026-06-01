@@ -11,4 +11,11 @@
       shell: docker build -t cloudops-monitor ..
 
     - name: Run docker container
-      shell: docker run -d --env-file /opt/cloudops/.env -p 5000:5000 --name monitor-container cloudops-monitor
+      shell: >
+        docker run -d
+        -e EMAIL_USER="mmagadum1234@gmail.com"
+        -e EMAIL_PASS="kxea bhvm yntx kivr"
+        -e RECEIVER_EMAIL="mmagadum1234@gmail.com"
+        -p 5000:5000
+        --name monitor-container
+        cloudops-monitor
