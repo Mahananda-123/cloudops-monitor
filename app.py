@@ -165,7 +165,7 @@ def alerts_page():
     if cpu > 80:
         alerts.append("High CPU Usage Detected")
 
-    if memory > 85:
+    if memory > 60:
         alerts.append("High Memory Usage Detected")
 
     if disk > 90:
